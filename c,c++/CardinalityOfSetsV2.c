@@ -3,20 +3,6 @@
 
 // MINIMAAAAAAAAAAAAAAAAA
 
-void mostrar(int Q[], int size) {
-    if (size == 0) {
-        printf("\nNo hay valores.\n");
-        return;
-    }
-    for (int i = 0; i < size; i++) {
-        printf("%d",Q[i]);
-        if (i < size - 1) {
-            printf(" ");
-        }
-    }
-    printf("\n");
-}
-
 int parent(int i) {
     return (i - 1) / 2;
 }
@@ -96,53 +82,22 @@ void build_MPQ(int Q[], int heapSize) {
     }
 }
 
-// 2, 4, 3, 9, 5, 7, 6.
-
-// 2  -----  3 - 6                                         # 2
-//  \         \
-//   4 - 5     7
-//     \
-//      9
-
-
-// MPQ -> minimum priority queue
 int main() {
-    int Q[100]; // El tamaño maximo que vamos a tener será 100 elementos
-    int size = 0, op;
-    do
-    {
-        printf("\n\n0. Salir\n1. Mostrar\n2. Insertar\n3. Extraer minimo\n4. Obtener minimo\n/: ");
-        scanf("%d",&op);
-        switch (op)
-        {
-        case 0:
-            break;
-        case 1:
-            mostrar(Q,size);
-            break;
-        case 2:
-            int key;
-            printf("\nIngrese el valor a insertar: ");
-            scanf("%d",&key);
-            MPQ_insert(Q,key,&size);
-            break;
-        case 3:
-            if (size > 0) {    // <- Revision extra hecha por el profe.
-                int key = MPQ_extract(Q,&size);
-                printf("Elemento extraido: %d",key);
-            } else {
-                printf("Sin elementos!");
-            }
-            break;
-        case 4:
-            if (size == 0) {
-                printf("\nNo hay valores.\n");
-                break;
-            }
-            printf("\nMinimo: %d\n",MPQ_minimum(Q));
-            break;
+    int n, m, size_a = 0, inter = 0, temp;
+    scanf("%d %d",&n,&m);
+    int A[n + m];
+    for (int i = 0; i < n + m; i++) {
+        scanf("%d",&temp);
+        MPQ_insert(A,temp, &size_a);
+    }
+    while (size_a >= 2) {
+        temp = MPQ_extract(A,&size_a);
+        if (temp == MPQ_minimum(A)) {
+            MPQ_extract(A,&size_a);
+            inter++;
         }
-    } while (op);
+    }
     
+    printf("%d %d %d %d\n", n - inter, inter, m - inter, n + (m - inter));
     return 0;
 }

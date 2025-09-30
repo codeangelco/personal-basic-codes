@@ -6,16 +6,16 @@ arreglo 1D que se encuentre dentro de la ventana */
 int main() {
     int length_arr, k;
 
-    cout << "Ingrese el tamaño del arreglo: ";
+    cerr << "Ingrese el tamaño del arreglo: ";
     cin >> length_arr;
-    cout << "\nIngrese el valor de k: ";
+    cerr << "\nIngrese el valor de k: ";
     cin >> k;
 
     int arr[length_arr];
 
-    cout << "\n\nVamos a rellenar el arreglo:\n";
+    cerr << "\n\nVamos a rellenar el arreglo:\n";
     for (int i = 1; i <= length_arr; i++) {
-        cout << "Elemento #" << i << ": ";
+        cerr << "Elemento #" << i << ": ";
         cin >> arr[i-1];
     }
 
@@ -32,11 +32,11 @@ int main() {
         
     }
 
-    cout << "\nArreglo principal:\n";
-    for (int num : arr) cout << num << " | ";
+    cerr << "\nArreglo principal:\n";
+    for (int num : arr) cerr << num << " | ";
 
-    cout << "\n\nArreglo respuesta:\n";
-    for (int num : ans) cout << num << " | ";
+    cerr << "\n\nArreglo respuesta:\n";
+    for (int num : ans) cerr << num << " | ";
     
 
     return 0;

@@ -46,7 +46,7 @@ int main() {
             }
         }
     }
-    cout << best << "\n";
+    cerr << best << "\n";
 
     return 0;
 }

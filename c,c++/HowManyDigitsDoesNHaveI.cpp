@@ -13,6 +13,6 @@ int main() {
     int r2 = floor(((double)a2 / (double)d2) * (double)d2_s);
     int r5 = floor(((double)b5 / (double)d5) * (double)d5_s);
 
-    cout << "2: " << r2 + 1 << "   | 5: " << r5 + 1 << endl;
+    cerr << "2: " << r2 + 1 << "   | 5: " << r5 + 1 << endl;
     return 0;
 }

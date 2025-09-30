@@ -18,8 +18,8 @@ int main() {
             if (letra == 'P') flag_p = 1;
         }
     }
-    if (flag_a+flag_p+flag_t == 3) cout << "S" << endl;
-    else cout << "N" << endl;
+    if (flag_a+flag_p+flag_t == 3) cerr << "S" << endl;
+    else cerr << "N" << endl;
 
     return 0;
 }

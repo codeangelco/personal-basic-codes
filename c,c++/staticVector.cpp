@@ -26,9 +26,9 @@ template <typename T> class vector{
 
 int main() {
     vector<int> social(10);
-    std::cout << social[0] << std::endl;
+    std::cerr << social[0] << std::endl;
     social[0] = 10;
-    std::cout << social[0] << std::endl;
+    std::cerr << social[0] << std::endl;
 
     return 0;
 }

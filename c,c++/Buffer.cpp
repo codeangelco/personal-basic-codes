@@ -3,7 +3,7 @@ using namespace std;
 
 int main() {
     clog << "Conexion clogs\n";
-    cout << "Resultado final: 42\n";   // lo que ve el usuario
+    cerr << "Resultado final: 42\n";   // lo que ve el usuario
     clog << "Iteracion 1 completada\n"; // lo que ve el programador
     // cerr << "Error: división por cero\n"; // error crítico
     clog << "Iteracion 2 completada\n";

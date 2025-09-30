@@ -39,8 +39,8 @@ int main() {
     vector<int> arr = {5,4,3,2,1};
     MergeSort(arr, 0, arr.size() - 1);
     for (int i = 0; i < arr.size(); i++) {
-        cout << arr[i] << " ";
+        cerr << arr[i] << " ";
     }
-    cout << endl;
+    cerr << endl;
     return 0;
 }

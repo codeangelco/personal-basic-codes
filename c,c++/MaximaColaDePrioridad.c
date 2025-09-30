@@ -90,59 +90,48 @@ void MPQ_insert(int Q[], int key, int *heapSize) {
     MPQ_decreaseKey(Q, *heapSize - 1, key);
 } 
 
-void build_MPQ(int Q[], int heapSize) {
+// void build_MPQ(int Q[], int heapSize) {              // <- Para maxima priodidad solo funcionaria si la lista a organizar esta invertida.
+//     for (int i = (heapSize / 2) - 1; i >= 0; i--) {
+//         MinHeapify(Q,i,heapSize);
+//     }
+// }
+
+void MaxPQ_insert(int Q[], int key, int *heapSize) {
+    MPQ_insert(Q, -key, heapSize);
+}
+
+int MaxPQ_maximum(int Q[]) {
+    return -(MPQ_minimum(Q));
+}
+
+int MaxPQ_extract(int Q[], int* heapSize) {
+    return -(MPQ_extract(Q,heapSize));
+}
+
+void build_MaxPQ(int Q[], int heapSize) {              // <- Para maxima priodidad solo funcionaria si la lista a organizar esta invertida.
+    for (int i = 0; i < heapSize; i++) {
+        Q[i] = -(Q[i]);
+    }
     for (int i = (heapSize / 2) - 1; i >= 0; i--) {
         MinHeapify(Q,i,heapSize);
     }
 }
 
-// 2, 4, 3, 9, 5, 7, 6.
-
-// 2  -----  3 - 6                                         # 2
-//  \         \
-//   4 - 5     7
-//     \
-//      9
-
-
-// MPQ -> minimum priority queue
 int main() {
-    int Q[100]; // El tamaño maximo que vamos a tener será 100 elementos
-    int size = 0, op;
-    do
-    {
-        printf("\n\n0. Salir\n1. Mostrar\n2. Insertar\n3. Extraer minimo\n4. Obtener minimo\n/: ");
-        scanf("%d",&op);
-        switch (op)
-        {
-        case 0:
-            break;
-        case 1:
-            mostrar(Q,size);
-            break;
-        case 2:
-            int key;
-            printf("\nIngrese el valor a insertar: ");
-            scanf("%d",&key);
-            MPQ_insert(Q,key,&size);
-            break;
-        case 3:
-            if (size > 0) {    // <- Revision extra hecha por el profe.
-                int key = MPQ_extract(Q,&size);
-                printf("Elemento extraido: %d",key);
-            } else {
-                printf("Sin elementos!");
-            }
-            break;
-        case 4:
-            if (size == 0) {
-                printf("\nNo hay valores.\n");
-                break;
-            }
-            printf("\nMinimo: %d\n",MPQ_minimum(Q));
-            break;
-        }
-    } while (op);
+
+    int arr[] = {1, 5, 2, 3, 7, 9, 10};
+    int heapSize = 7;
     
+    build_MaxPQ(arr, heapSize);
+    printf("%d\n",MaxPQ_maximum(arr));
+    MaxPQ_extract(arr, &heapSize);
+    MaxPQ_extract(arr, &heapSize);
+    printf("%d\n",MaxPQ_maximum(arr));
+    MaxPQ_insert(arr, 100, &heapSize);
+    MaxPQ_insert(arr, 10, &heapSize);
+    printf("%d\n",MaxPQ_maximum(arr));
+    MaxPQ_extract(arr, &heapSize);
+    printf("%d\n",MaxPQ_maximum(arr));
+
     return 0;
 }

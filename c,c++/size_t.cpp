@@ -2,7 +2,7 @@
 
 void print_arry(int array[], size_t size) {
     for (int i = 0; i < size; i++) {
-        std::cout << array[i] << (i < size - 1 ? " " : "\n");
+        std::cerr << array[i] << (i < size - 1 ? " " : "\n");
     }
 }
 

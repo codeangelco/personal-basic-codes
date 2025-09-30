@@ -38,6 +38,6 @@ int main() {
         }
     }
 
-    cout << ans << endl;
+    cerr << ans << endl;
     return 0;
 }

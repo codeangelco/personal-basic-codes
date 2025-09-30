@@ -28,7 +28,7 @@ int main() {
         else points3 += directo;
     }
 
-    cout << points1 << " " << points2 << " " << points3 << " " << pointsInes << endl;
+    cerr << points1 << " " << points2 << " " << points3 << " " << pointsInes << endl;
 
     return 0;
 }
