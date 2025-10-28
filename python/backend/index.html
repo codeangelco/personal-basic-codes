@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Mini Biblioteca</title>
+    <style>
+        :root{
+            --bg:#0f1724;
+            --card:#0f1724;
+            --muted:#9aa4b2;
+            --accent:#ffb86b;
+            --glass: rgba(255,255,255,0.04);
+            --glass-2: rgba(255,255,255,0.03);
+            --card-bg: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        }
+        *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+        html,body{height:100%;margin:0;background:
+            radial-gradient(1200px 400px at 10% 10%, rgba(255,200,120,0.04), transparent 10%),
+            radial-gradient(900px 300px at 95% 90%, rgba(120,200,255,0.03), transparent 10%),
+            var(--bg);
+            color:#e6eef8;
+        }
+        header{
+            padding:28px 20px;
+            display:flex;
+            gap:20px;
+            align-items:center;
+            justify-content:space-between;
+            max-width:1100px;margin:0 auto;
+        }
+        .brand{
+            display:flex;gap:14px;align-items:center;
+        }
+        .logo{
+            width:54px;height:54px;border-radius:10px;
+            background:linear-gradient(135deg,#ffd8a8,#ffb86b);
+            display:flex;align-items:center;justify-content:center;color:#1b1b1b;font-weight:700;
+            box-shadow:0 6px 18px rgba(0,0,0,0.4);
+        }
+        h1{font-size:20px;margin:0}
+        p.lead{margin:0;color:var(--muted);font-size:13px}
+        .controls{display:flex;gap:12px;align-items:center}
+        .search{
+            background:var(--glass);border:1px solid rgba(255,255,255,0.03);
+            padding:8px 12px;border-radius:10px;color:inherit;outline:none;
+            min-width:220px;
+        }
+        main{max-width:1100px;margin:22px auto;padding:0 20px;}
+        .hero{
+            background:var(--card-bg);border-radius:14px;padding:20px;display:flex;gap:20px;align-items:center;
+            box-shadow:0 8px 30px rgba(2,6,23,0.6);
+            border:1px solid rgba(255,255,255,0.02);
+        }
+        .hero .left{flex:1}
+        .hero h2{margin:0 0 6px 0;font-size:20px}
+        .hero p{margin:0;color:var(--muted);font-size:14px}
+        .featured{
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px;
+        }
+        .card{
+            background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.02));
+            border-radius:12px;padding:14px;display:flex;gap:12px;align-items:flex-start;
+            border:1px solid rgba(255,255,255,0.03);
+            transition:transform .18s ease, box-shadow .18s ease;
+        }
+        .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+        .cover{
+            width:72px;height:96px;border-radius:6px;flex-shrink:0;
+            display:flex;align-items:flex-end;justify-content:center;color:#041022;font-weight:700;padding:8px;
+            background:linear-gradient(180deg, #fff6e8, #ffd8a8);
+            box-shadow:inset 0 -20px 30px rgba(0,0,0,0.05);
+            font-size:12px;text-align:center;
+        }
+        .meta{flex:1}
+        .title{font-weight:700;margin:0;font-size:15px}
+        .author{color:var(--muted);font-size:13px;margin:6px 0}
+        .desc{color:var(--muted);font-size:13px;margin:6px 0 10px;line-height:1.3}
+        .tags{display:flex;gap:8px;flex-wrap:wrap}
+        .tag{background:var(--glass-2);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted)}
+        .rating{margin-left:auto;color:var(--accent);font-weight:700}
+        footer{max-width:1100px;margin:28px auto 60px;padding:0 20px;color:var(--muted);font-size:13px;text-align:center}
+        /* small helper for stars */
+        .stars{color:#ffd27a}
+        @media (max-width:520px){
+            .hero{flex-direction:column;align-items:flex-start}
+            .controls{flex-direction:column;align-items:stretch}
+            .search{width:100%}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <div class="logo">LB</div>
+            <div>
+                <h1>Mini Biblioteca</h1>
+                <p class="lead">Curaduría de libros ficticios para descubrir nuevas historias</p>
+            </div>
+        </div>
+        <div class="controls">
+            <input id="q" class="search" placeholder="Buscar por título, autor o género..." />
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="left">
+                <h2 id="hero-title">Lecturas recomendadas</h2>
+                <p>Seis novelas cortas, guías y relatos seleccionados para diferentes gustos: aventura, ciencia ficción, ensayo y más. Usa la búsqueda para filtrar.</p>
+            </div>
+            <div class="right" style="text-align:right;color:var(--muted)">
+                <div style="font-weight:700;font-size:18px">Descubre hoy</div>
+                <div style="margin-top:6px">Fecha: <span style="color:#cfe9ff">2031-11-08</span></div>
+            </div>
+        </section>
+
+        <section class="featured" id="books">
+            <article class="card" data-title="El mapa de las mareas" data-author="María Soler" data-genre="Aventura">
+                <div class="cover">MMA<br><small style="opacity:.8">192 págs</small></div>
+                <div class="meta">
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <div>
+                            <div class="title">El mapa de las mareas</div>
+                            <div class="author">María Soler · 2027 · Aventura</div>
+                        </div>
+                        <div class="rating stars">★★★★☆</div>
+                    </div>
+                    <p class="desc">Una cartógrafa descubre cartas náuticas que cambian según las emociones del mar. Relato de viaje con misterio y folklore costero.</p>
+                    <div class="tags"><span class="tag">Aventura</span><span class="tag">Folklore</span><span class="tag">Novela corta</span></div>
+                </div>
+            </article>
+
+            <article class="card" data-title="Circuitos del sueño" data-author="R. K. Nand" data-genre="Ciencia ficción">
+                <div class="cover" style="background:linear-gradient(180deg,#e8f2ff,#cfe9ff)">CS<br><small style="opacity:.8">240 págs</small></div>
+                <div class="meta">
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <div>
+                            <div class="title">Circuitos del sueño</div>
+                            <div class="author">R. K. Nand · 2029 · Ciencia ficción</div>
+                        </div>
+                        <div class="rating stars">★★★★★</div>
+                    </div>
+                    <p class="desc">Antología que explora cómo las máquinas interpretan los sueños humanos y el impacto en la identidad colectiva. Ideas grandes en relatos breves.</p>
+                    <div class="tags"><span class="tag">Sci‑Fi</span><span class="tag">Antología</span><span class="tag">Filosófico</span></div>
+                </div>
+            </article>
+
+            <article class="card" data-title="Manual de jardines urbanos" data-author="Lucio Fernández" data-genre="No ficción">
+                <div class="cover" style="background:linear-gradient(180deg,#eaffec,#b8ffe0)">JG<br><small style="opacity:.8">160 págs</small></div>
+                <div class="meta">
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <div>
+                            <div class="title">Manual de jardines urbanos</div>
+                            <div class="author">Lucio Fernández · 2030 · No ficción</div>
+                        </div>
+                        <div class="rating stars">★★★☆☆</div>
+                    </div>
+                    <p class="desc">Guía práctica para crear microhuertos en balcones y azoteas, combinando diseño, plantas autóctonas y soluciones ecológicas compactas.</p>
+                    <div class="tags"><span class="tag">Guía</span><span class="tag">Ecología</span><span class="tag">DIY</span></div>
+                </div>
+            </article>
+
+            <article class="card" data-title="La biblioteca de los relojes" data-author="Aina Valls" data-genre="Fantasía">
+                <div class="cover" style="background:linear-gradient(180deg,#fff0f6,#ffd8e8)">BR<br><small style="opacity:.8">208 págs</small></div>
+                <div class="meta">
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <div>
+                            <div class="title">La biblioteca de los relojes</div>
+                            <div class="author">Aina Valls · 2026 · Fantasía</div>
+                        </div>
+                        <div class="rating stars">★★★★☆</div>
+                    </div>
+                    <p class="desc">Un edificio donde los libros marcan el tiempo: cada capítulo despierta recuerdos de vidas que nunca ocurrieron. Poético y melancólico.</p>
+                    <div class="tags"><span class="tag">Fantasía</span><span class="tag">Mágico</span></div>
+                </div>
+            </article>
+
+            <article class="card" data-title="Pequeñas revoluciones" data-author="Nadia Petrov" data-genre="Ensayo">
+                <div class="cover" style="background:linear-gradient(180deg,#fff8e6,#fff0b8)">PR<br><small style="opacity:.8">132 págs</small></div>
+                <div class="meta">
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <div>
+                            <div class="title">Pequeñas revoluciones</div>
+                            <div class="author">Nadia Petrov · 2028 · Ensayo</div>
+                        </div>
+                        <div class="rating stars">★★★☆☆</div>
+                    </div>
+                    <p class="desc">Ensayos cortos sobre cambios cotidianos que transforman comunidades: cultura, cuidado y economía local desde la práctica.</p>
+                    <div class="tags"><span class="tag">Ensayo</span><span class="tag">Comunidad</span></div>
+                </div>
+            </article>
+
+            <article class="card" data-title="Atlas del silencio" data-author="Jonás Rivas" data-genre="Misterio">
+                <div class="cover" style="background:linear-gradient(180deg,#e9f7ff,#d3efff)">AS<br><small style="opacity:.8">280 págs</small></div>
+                <div class="meta">
+                    <div style="display:flex;align-items:center;gap:8px">
+                        <div>
+                            <div class="title">Atlas del silencio</div>
+                            <div class="author">Jonás Rivas · 2031 · Misterio</div>
+                        </div>
+                        <div class="rating stars">★★★★☆</div>
+                    </div>
+                    <p class="desc">Un cartógrafo busca lugares donde nadie habla: pueblos, calles y estaciones marcadas por ausencias. Thriller atmosférico con giros inesperados.</p>
+                    <div class="tags"><span class="tag">Misterio</span><span class="tag">Thriller</span></div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        Mini Biblioteca — contenidos ficticios creados para probar diseño. Filtra en tiempo real por título, autor o género.
+    </footer>
+
+    <script>
+        (function(){
+            const q = document.getElementById('q');
+            const cards = Array.from(document.querySelectorAll('#books .card'));
+            function normalize(s){ return s ? s.toLowerCase().trim() : ''; }
+            function filter(value){
+                const t = normalize(value);
+                cards.forEach(card=>{
+                    const title = normalize(card.dataset.title);
+                    const author = normalize(card.dataset.author);
+                    const genre = normalize(card.dataset.genre);
+                    const match = !t || title.includes(t) || author.includes(t) || genre.includes(t);
+                    card.style.display = match ? '' : 'none';
+                });
+            }
+            q.addEventListener('input', e => filter(e.target.value));
+            // small accessibility: focus first card when pressing enter on search empty
+            q.addEventListener('keydown', e=>{
+                if(e.key === 'Enter'){
+                    const first = cards.find(c => c.style.display !== 'none');
+                    if(first) first.querySelector('.title').focus?.();
+                }
+            });
+            // make titles focusable for keyboard
+            document.querySelectorAll('.title').forEach(el => el.tabIndex = 0);
+        })();
+    </script>
+</body>
+</html></div></article></div></section>

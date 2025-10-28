@@ -1,6 +1,16 @@
 #include <iostream>
 #include <string>
-using namespace std;
+#include <algorithm>  // para std::erase
+// #include <ranges>     // para std::ranges::transform
+// #include <cctype>     // para ::toupper y ::tolower
+// using namespace std;
+
+inline void toLowerCase(std::string &str) {
+    std::transform(str.begin(), str.end(), str.begin(), ::tolower);
+}
+inline void toUpperCase(std::string &str) {
+    std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+}
 
 void ingresarNombre() {
     std::string full_name;
@@ -18,8 +28,12 @@ void ingresarNombre() {
         exit (1);
     }
 
+    toUpperCase(full_name);
+
     std::cout << "Bienvenido " << full_name << "!" << std::endl;
 }
+
+
 
 void appendThings() {
     std::string full_name;
@@ -30,17 +44,25 @@ void appendThings() {
     
 
     std::string correo = full_name + "@gmail.com";
-    erase(correo, ' ');
-
-
+    toLowerCase(correo);
+    std::erase_if(correo, [](char a) { return !(a != 'a' && a != 'e'); });
+    // erase(correo, 'a');
+    // erase(correo, 'i');
 
 
     
-    uppercase(correo);
-
     std::cout << "Tu correo es: " << correo << std::endl;
 
 
+}
+
+void buscarAlgo() {
+    std::string full_text;
+
+    std::cout << "Ingresa el texto completo:" << std::endl;
+    getline(std::cin, full_text);
+
+    
 }
 
 
@@ -48,6 +70,8 @@ int main() {
     ingresarNombre();
 
     appendThings();
+
+    buscarAlgo();
 
     return 0;
 }

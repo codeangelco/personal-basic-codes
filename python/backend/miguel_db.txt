@@ -1,0 +1,1 @@
+id:1,name:El principito,price:10000.0,stock:12

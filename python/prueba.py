@@ -1,3 +1,3 @@
-a = 10
-
-prin
+print("Hola mundo!")
+a = -324
+print(a)
